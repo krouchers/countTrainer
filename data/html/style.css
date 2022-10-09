@@ -233,11 +233,11 @@ Styleguide Nord
 }
 
 body {
-    color: var(--nord4);
-    background-color: var(--nord0);
+  color: var(--nord4);
+  background-color: rgb(11, 96, 176);
 }
 
- /* unvisited link */
+/* unvisited link */
 a:link {
   color: var(--nord4);
 }
@@ -248,18 +248,101 @@ a:visited {
 }
 
 /* mouse over link */
-a:hover {
-}
+a:hover {}
 
 /* selected link */
-a:active {
-} 
+a:active {}
 
 /* layout */
 .flex-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.wrap {
+  perspective: 800px;
+  perspective-origin: 50% 100px;
+}
+
+.cube {
+  position: relative;
+  width: 200px;
+  transform-style: preserve-3d;
+}
+
+.cube div {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background-color: #06e6ff;
+}
+
+.back {
+  transform: translateZ(-100px) rotateY(180deg);
+}
+
+.right {
+  transform: rotateY(-270deg) translateX(100px);
+  transform-origin: top right;
+}
+
+.left {
+  transform: rotateY(270deg) translateX(-100px);
+  transform-origin: center left;
+}
+
+.top {
+  transform: rotateX(-90deg) translateY(-100px);
+  transform-origin: top center;
+}
+
+.bottom {
+  transform: rotateX(90deg) translateY(100px);
+  transform-origin: bottom center;
+}
+
+.front {
+  transform: translateZ(100px);
+}
+
+
+@keyframes spin {
+  from {
+    transform: rotateY(0);
+  }
+
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+.cube {
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin-vertical {
+	from { transform: rotateX(0); }
+	to { transform: rotateX(-360deg); }
+}
+
+.cube-wrap.vertical .cube {
+	margin: 0 auto; /* keeps the cube centered */
+
+	transform-origin: 0 100px;
+	animation: spin-vertical 5s infinite linear;
+}
+
+.cube-wrap.vertical .top {
+	transform: rotateX(-270deg) translateY(-100px);
+}
+
+.cube-wrap.vertical .back {
+	transform: translateZ(-100px) rotateX(180deg);
+}
+
+.cube-wrap.vertical .bottom {
+	transform: rotateX(-90deg) translateY(100px);
 }

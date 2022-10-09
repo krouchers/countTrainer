@@ -19,10 +19,13 @@ from cli import get_config, parse_args
 
 from core import Arithmetictrainer, create_arithmetictrainer_from_files
 
-DATA = Path(__file__).parent.joinpath('data')
-HTML = DATA.joinpath('html/index.html')
-CSS = DATA.joinpath('html/style.css')
+# DATA = Path(__file__).parent.joinpath('data')
+# HTML = DATA.joinpath('html/index.html')
+# CSS = DATA.joinpath('html/style.css')
 
+DATA = Path(__file__).parent.joinpath('tests')
+HTML = DATA.joinpath('index.html')
+CSS = DATA.joinpath('style.css')
 global trainer
 
 
@@ -38,14 +41,12 @@ def get_html(html_file: Path, css_file=None, context={}):
         raise ValueError(f'[{html_file}] is not a file.')
     with open(html_file) as f:
         html = f.read()
-    with open(html_file) as f:
-        html = f.read()
     if css_file != None:
         with open(CSS) as f:
             css = f.read()
         html = html.replace('STYLE', css, 1)
     for k, v in context.items():
-        pattern = r'\{\{\s*' + k + r'\s*\}\}'
+        pattern = r'\{\{\s' + k + r'\s\}\}'
         html = re.sub(pattern, str(v), html)
     return html.encode()
 
